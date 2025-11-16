@@ -1,15 +1,15 @@
 <template>
   <div class="container">
-    <h1><el-icon><ChatDotRound /></el-icon> 某种聊天记录</h1>
+    <h1><el-icon><ChatDotRound /></el-icon> 某種聊天紀錄</h1>
     <div class="file-input-container">
       <label for="fileInput" class="file-input-label">
         <el-icon><Upload /></el-icon>
-        选择 JSON 文件
+        選擇 JSON 文件
       </label>
       <input type="file" id="fileInput" accept=".json" @change="handleFileChange">
       <label for="txtFileInput" class="file-input-label" style="margin-left: 12px;">
         <el-icon><Upload /></el-icon>
-        上传聊天txt
+        上傳聊天txt
       </label>
       <input type="file" id="txtFileInput" accept=".txt" multiple @change="handleTxtFileChange">
     </div>
@@ -20,7 +20,7 @@
       <div class="search-container">
         <el-input
           v-model="searchQuery"
-          placeholder="搜索聊天记录..."
+          placeholder="搜索聊天紀錄..."
           :prefix-icon="Search"
           clearable
           @input="handleSearch"
@@ -39,7 +39,7 @@
               @change="toggleSelectAll"
             >
             <el-icon><Select /></el-icon>
-            选择所有
+            選擇所有
           </label>
         </div>
         <ul v-if="lastOutputs.length > 0">
@@ -61,7 +61,7 @@
         </ul>
         <div v-else class="empty-state">
           <el-icon><UploadFilled /></el-icon>
-          请上传 conversation.json 文件 以查看聊天记录
+          請上傳 conversation.json 文件 以查看聊天紀錄
         </div>
       </div>
     </div>
@@ -76,7 +76,7 @@
               <div class="statistics-note">
                 <el-tooltip
                   effect="dark"
-                  content="精确计算采用GPT官方分词器tokenizer-GPT 4o，不适用于Claude。考虑到聊天内容还包含文件、图片等无法被提取的内容，token计算结果仅供参考。"
+                  content="精確計算採用GPT官方分詞器tokenizer-GPT 4o，不適用於Claude。考慮到聊天內容還包含文件、圖片等無法被提取的內容，token計算結果僅供參考。"
                   placement="bottom"
                 >
                   <el-icon><InfoFilled /></el-icon>
@@ -104,28 +104,28 @@
               <button 
                 class="mode-toggle-button" 
                 @click="toggleSelectMode"
-                :title="isSelectMode ? '退出选择模式' : '进入选择模式'"
+                :title="isSelectMode ? '退出選擇模式' : '進入選擇模式'"
               >
                 <el-icon><Select /></el-icon>
-                {{ isSelectMode ? '退出选择' : '选择消息' }}
+                {{ isSelectMode ? '退出選擇' : '選擇消息' }}
               </button>
               <template v-if="isSelectMode">
                 <button 
                   class="select-all-button" 
                   @click="toggleSelectAllMessages"
-                  :title="isAllMessagesSelected ? '取消全选' : '全选消息'"
+                  :title="isAllMessagesSelected ? '取消全選' : '全選消息'"
                 >
                   <el-icon><Select /></el-icon>
-                  {{ isAllMessagesSelected ? '取消全选' : '全选' }}
+                  {{ isAllMessagesSelected ? '取消全選' : '全選' }}
                 </button>
                 <button 
                   class="export-button" 
                   @click="exportSelectedMessages"
                   :disabled="!hasSelectedMessages"
-                  title="导出选中的消息"
+                  title="導出選中的消息"
                 >
                   <el-icon><Download /></el-icon>
-                  导出选中 ({{ selectedMessagesCount }})
+                  導出選中 ({{ selectedMessagesCount }})
                 </button>
               </template>
             </div>
@@ -137,7 +137,7 @@
               >
                 <el-icon v-if="!isCalculating"><InfoFilled /></el-icon>
                 <el-icon v-else class="is-loading"><Loading /></el-icon>
-                {{ isCalculating ? '计算中...' : '计算精确Token' }}
+                {{ isCalculating ? '計算中...' : '計算精確Token' }}
               </button>
               <span v-if="exactTokens !== null" class="stat-value">
                 <span class="token-value">{{ exactTokens }}</span>
@@ -181,7 +181,7 @@
     <div class="button-container">
       <button @click="handleDownload" :disabled="!canDownload">
         <el-icon><Download /></el-icon>
-        导出选中对话
+        導出選中對話
       </button>
     </div>
     <div class="status" v-text="status"></div>
@@ -237,7 +237,7 @@ export default {
     Loading
   },
   setup() {
-    const outputContent = ref('聊天记录将在这里显示');
+    const outputContent = ref('聊天紀錄將在這裡顯示');
     const status = ref('');
     const lastOutputs = ref([]);
     const selectedFiles = ref([]);
@@ -650,14 +650,14 @@ export default {
           selectedFiles.value = outputs.map(() => false);
           
           if (outputs.length === 0) {
-            ElMessage.error("解析完成，但未找到对话内容");
+            ElMessage.error("解析完成，但未找到對話內容");
             return;
           }
           
           status.value = `解析完成，找到 ${outputs.length} 个会话`;
         } catch (err) {
-          ElMessage.error(err.message || "解析失败");
-          status.value = "解析失败";
+          ElMessage.error(err.message || "解析失敗");
+          status.value = "解析失敗";
         }
       };
       
@@ -668,7 +668,7 @@ export default {
       if (!selectedFiles.value.some(selected => selected)) return;
       
       try {
-        status.value = "正在准备导出...";
+        status.value = "正在準備導出...";
         
         const selectedOutputs = lastOutputs.value.filter((_, index) => selectedFiles.value[index]);
         
@@ -681,10 +681,10 @@ export default {
           a.download = selectedOutputs[0].filename;
           a.click();
           URL.revokeObjectURL(url);
-          status.value = "导出完成";
+          status.value = "導出完成";
         } else {
           // 多文件打包为 zip
-          status.value = "正在打包文件，请稍候...";
+          status.value = "正在打包文件，請稍後...";
           const zip = new JSZip();
           
           // 添加所有选中的文件到zip
@@ -704,7 +704,7 @@ export default {
           status.value = `已导出 ${selectedOutputs.length} 个文件到 chatgpt_dialogues.zip`;
         }
       } catch (err) {
-        status.value = "导出失败";
+        status.value = "導出失敗";
       }
     }
 
