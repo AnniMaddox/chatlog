@@ -9,14 +9,14 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/favicon.ico",
-      "sizes": "48x48",
-      "type": "image/x-icon"
+      "src": "https://i.postimg.cc/MZBnRFGT/7F982521-768A-4590-8739-7D8DEB06AD6F.png",
+      "sizes": "192x192",
+      "type": "image/png"
     },
     {
-      "src": "/favicon.ico",
-      "sizes": "192x192",
-      "type": "image/x-icon"
+      "src": "https://i.postimg.cc/MZBnRFGT/7F982521-768A-4590-8739-7D8DEB06AD6F.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ]
 }
